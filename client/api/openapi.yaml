@@ -1,0 +1,45 @@
+openapi: 3.0.0
+info:
+  description: getting started
+  termsOfService: under contruction
+  title: Swagger Getting Started
+  version: 1.0.0
+servers:
+- url: http://localhost:8081
+paths:
+  /users:
+    get:
+      description: Returns all users.
+      operationId: listUsers
+      parameters:
+      - description: active flag to filter by
+        explode: true
+        in: query
+        name: active
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/User'
+                type: array
+          description: successful operation
+components:
+  schemas:
+    User:
+      example:
+        name: name
+        active: true
+      properties:
+        name:
+          type: string
+        active:
+          type: boolean
+      required:
+      - name
+      type: object
