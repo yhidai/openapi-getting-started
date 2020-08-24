@@ -8,9 +8,8 @@
  */
 
 package client
-// User struct for User
-type User struct {
-	Id int64 `json:"id"`
-	Name string `json:"name"`
-	Active bool `json:"active,omitempty"`
+// Error struct for Error
+type Error struct {
+	Code int32 `json:"code"`
+	Message string `json:"message"`
 }

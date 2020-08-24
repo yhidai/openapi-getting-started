@@ -8,9 +8,7 @@
  */
 
 package client
-// User struct for User
-type User struct {
+// UserAllOf struct for UserAllOf
+type UserAllOf struct {
 	Id int64 `json:"id"`
-	Name string `json:"name"`
-	Active bool `json:"active,omitempty"`
 }

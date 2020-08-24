@@ -8,9 +8,9 @@
  */
 
 package client
-// User struct for User
-type User struct {
-	Id int64 `json:"id"`
+// NewUser struct for NewUser
+type NewUser struct {
+	Id int64 `json:"id,omitempty"`
 	Name string `json:"name"`
 	Active bool `json:"active,omitempty"`
 }

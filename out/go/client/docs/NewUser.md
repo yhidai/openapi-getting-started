@@ -1,10 +1,10 @@
-# User
+# NewUser
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | **int64** |  | 
+**Id** | **int64** |  | [optional] 
 **Name** | **string** |  | 
 **Active** | **bool** |  | [optional] 
 
