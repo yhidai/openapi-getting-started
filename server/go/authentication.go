@@ -4,9 +4,17 @@ import (
 	"encoding/json"
 	"log"
 	"net/http"
+	"os"
 )
 
-const APIKey = "xxxxxxxxxxxx"
+// APIKey is used to authenticate requests to protected resources.
+var APIKey = "xxxxxxxxxxxx"
+
+func init() {
+	if apiKey, ok := os.LookupEnv("SAMPLE_APP_API_KEY"); ok {
+		APIKey = apiKey
+	}
+}
 
 // Authenticate authenticates a request whether the request has a correct APIKey
 func Authenticate(inner http.Handler, apiKey string) http.Handler {

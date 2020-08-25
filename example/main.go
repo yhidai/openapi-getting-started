@@ -5,6 +5,7 @@ import (
 	"errors"
 	"fmt"
 	"log"
+	"os"
 
 	apiClient "github.com/yhidai/openapi-getting-started/client"
 )
@@ -14,6 +15,10 @@ func main() {
 
 	// key := "xxxxxxxxxxxx"
 	key := "invalid key"
+	if apiKey, ok := os.LookupEnv("SAMPLE_APP_API_KEY"); ok {
+		key = apiKey
+	}
+
 	ctx := context.WithValue(context.Background(), apiClient.ContextAPIKey, apiClient.APIKey{Key: key})
 	users, response, err := client.DefaultApi.ListUsers(ctx, nil)
 	if err != nil {
