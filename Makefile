@@ -8,9 +8,7 @@ generate-client:
 update-client:
 	@docker run -v ${PWD}:/local -u $(id -u):$(id -g) openapitools/openapi-generator-cli:v4.3.1 generate -i /local/openapi.yaml -g go -o /local/out/go/client --package-name client --git-user-id yhidai --git-repo-id openapi-getting-started/client
 	@sudo chown -R $(UNAME):$(UNAME) ./out/
-	@cp -rf ./client/example ./
 	@cp -rf ./out/go/client ./
-	@cp -rf ./example ./client
 	@echo "client updated."
 
 generate-server:
