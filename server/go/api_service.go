@@ -9,9 +9,6 @@
 
 package server
 
-import (
-	"errors"
-)
 
 // DefaultApiService is a service that implents the logic for the DefaultApiServicer
 // This service should implement the business logic for every endpoint for the DefaultApi API.
@@ -74,5 +71,5 @@ func (s *ApiService) UpdateUser(id int64, user User) (interface{}, error) {
 	return &User{
 		Name: "Tom Hanks",
 	}, nil
-	return nil, errors.New("service method 'UpdateUser' not implemented")
+	// return nil, errors.New("service method 'UpdateUser' not implemented")
 }
