@@ -19,10 +19,10 @@ import (
 func main() {
 	log.Printf("Server started")
 
-	DefaultApiService := server.NewDefaultApiService()
-	DefaultApiController := server.NewDefaultApiController(DefaultApiService)
+	apiService := server.NewApiService()
+	defaultAPIController := server.NewDefaultApiController(apiService)
 
-	router := server.NewRouter(DefaultApiController)
+	router := server.NewRouter(defaultAPIController)
 
-	log.Fatal(http.ListenAndServe(":8080", router))
+	log.Fatal(http.ListenAndServe(":8081", router))
 }

@@ -6,6 +6,8 @@ info:
   version: 1.0.0
 servers:
 - url: http://localhost:8081
+security:
+- ApiKeyAuth: []
 paths:
   /users:
     get:
@@ -29,6 +31,24 @@ paths:
                   $ref: '#/components/schemas/User'
                 type: array
           description: successful operation
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: API Key is missing or invalid
+          headers:
+            WWW_Authenticate:
+              explode: false
+              schema:
+                type: string
+              style: simple
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: unexpected error
     post:
       description: Create a new user in the user management service.
       operationId: addUser
@@ -46,6 +66,18 @@ paths:
               schema:
                 $ref: '#/components/schemas/User'
           description: user response
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: API Key is missing or invalid
+          headers:
+            WWW_Authenticate:
+              explode: false
+              schema:
+                type: string
+              style: simple
         default:
           content:
             application/json:
@@ -69,6 +101,18 @@ paths:
       responses:
         "204":
           description: delete user response
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: API Key is missing or invalid
+          headers:
+            WWW_Authenticate:
+              explode: false
+              schema:
+                type: string
+              style: simple
         default:
           content:
             application/json:
@@ -95,6 +139,18 @@ paths:
               schema:
                 $ref: '#/components/schemas/User'
           description: user response
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: API Key is missing or invalid
+          headers:
+            WWW_Authenticate:
+              explode: false
+              schema:
+                type: string
+              style: simple
         default:
           content:
             application/json:
@@ -128,6 +184,18 @@ paths:
               schema:
                 $ref: '#/components/schemas/User'
           description: update user response
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: API Key is missing or invalid
+          headers:
+            WWW_Authenticate:
+              explode: false
+              schema:
+                type: string
+              style: simple
         default:
           content:
             application/json:
@@ -135,6 +203,25 @@ paths:
                 $ref: '#/components/schemas/Error'
           description: unexpected error
 components:
+  responses:
+    UnauthorizedError:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+      description: API Key is missing or invalid
+      headers:
+        WWW_Authenticate:
+          explode: false
+          schema:
+            type: string
+          style: simple
+    UnexpectedError:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+      description: unexpected error
   schemas:
     User:
       allOf:
@@ -174,3 +261,8 @@ components:
           type: integer
       required:
       - id
+  securitySchemes:
+    ApiKeyAuth:
+      in: header
+      name: X-API-KEY
+      type: apiKey

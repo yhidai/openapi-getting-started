@@ -28,6 +28,10 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/User"
+        '401':
+          $ref: "#/components/responses/UnauthorizedError"
+        default:
+          $ref: "#/components/responses/UnexpectedError"
     post:
       description: Create a new user in the user management service.
       operationId: addUser
@@ -45,12 +49,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/User'
+        '401':
+          $ref: "#/components/responses/UnauthorizedError"
         default:
-          description: unexpected error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
+          $ref: "#/components/responses/UnexpectedError"
   /users/${id}:
     get:
       description: Returns a user specified with the id in path
@@ -71,13 +73,10 @@ paths:
               schema:
                 type: object
                 $ref: '#/components/schemas/User'
+        '401':
+          $ref: "#/components/responses/UnauthorizedError"
         default:
-          description: unexpected error
-          content:
-            application/json:
-              schema:
-                type: object
-                $ref: '#/components/schemas/Error'
+          $ref: "#/components/responses/UnexpectedError"
     put:
       description: Update a user specified with the id in path
       operationId: updateUser
@@ -104,13 +103,10 @@ paths:
               schema:
                 type: object
                 $ref: '#/components/schemas/User'
+        '401':
+          $ref: "#/components/responses/UnauthorizedError"
         default:
-          description: unexpected error
-          content:
-            application/json:
-              schema:
-                type: object
-                $ref: '#/components/schemas/Error'
+          $ref: "#/components/responses/UnexpectedError"
     delete:
       description: Delete a user specified with the id in path
       operationId: deleteUser
@@ -125,13 +121,10 @@ paths:
       responses:
         '204':
           description: delete user response
+        '401':
+          $ref: "#/components/responses/UnauthorizedError"
         default:
-          description: unexpected error
-          content:
-            application/json:
-              schema:
-                type: object
-                $ref: '#/components/schemas/Error'
+          $ref: "#/components/responses/UnexpectedError"
           
 components:
   schemas:
@@ -168,5 +161,30 @@ components:
           format: int32
         message:
           type: string
+  responses:
+    UnauthorizedError:
+      description: API Key is missing or invalid
+      headers:
+        WWW_Authenticate:
+          schema:
+            type: string
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    UnexpectedError:
+      description: unexpected error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-KEY
+
+security:
+  - ApiKeyAuth: []
 
 

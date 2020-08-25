@@ -14,46 +14,52 @@ import (
 )
 
 // DefaultApiService is a service that implents the logic for the DefaultApiServicer
-// This service should implement the business logic for every endpoint for the DefaultApi API. 
+// This service should implement the business logic for every endpoint for the DefaultApi API.
 // Include any external packages or services that will be required by this service.
-type DefaultApiService struct {
+type ApiService struct {
 }
 
 // NewDefaultApiService creates a default api service
-func NewDefaultApiService() DefaultApiServicer {
-	return &DefaultApiService{}
+func NewApiService() DefaultApiServicer {
+	return &ApiService{}
 }
 
-// AddUser - 
-func (s *DefaultApiService) AddUser(newUser NewUser) (interface{}, error) {
+// AddUser -
+func (s *ApiService) AddUser(newUser NewUser) (interface{}, error) {
 	// TODO - update AddUser with the required logic for this service method.
 	// Add api_default_service.go to the .openapi-generator-ignore to avoid overwriting this service implementation when updating open api generation.
 	return nil, errors.New("service method 'AddUser' not implemented")
 }
 
-// DeleteUser - 
-func (s *DefaultApiService) DeleteUser(id int64) (interface{}, error) {
+// DeleteUser -
+func (s *ApiService) DeleteUser(id int64) (interface{}, error) {
 	// TODO - update DeleteUser with the required logic for this service method.
 	// Add api_default_service.go to the .openapi-generator-ignore to avoid overwriting this service implementation when updating open api generation.
 	return nil, errors.New("service method 'DeleteUser' not implemented")
 }
 
-// GetUser - 
-func (s *DefaultApiService) GetUser(id int64) (interface{}, error) {
+// GetUser -
+func (s *ApiService) GetUser(id int64) (interface{}, error) {
 	// TODO - update GetUser with the required logic for this service method.
 	// Add api_default_service.go to the .openapi-generator-ignore to avoid overwriting this service implementation when updating open api generation.
 	return nil, errors.New("service method 'GetUser' not implemented")
 }
 
-// ListUsers - 
-func (s *DefaultApiService) ListUsers(active string) (interface{}, error) {
+// ListUsers -
+func (s *ApiService) ListUsers(active string) (interface{}, error) {
 	// TODO - update ListUsers with the required logic for this service method.
 	// Add api_default_service.go to the .openapi-generator-ignore to avoid overwriting this service implementation when updating open api generation.
-	return nil, errors.New("service method 'ListUsers' not implemented")
+
+	return []*User{
+		{
+			Name: "Tom",
+		},
+	}, nil
+	// return nil, errors.New("service method 'ListUsers' not implemented")
 }
 
-// UpdateUser - 
-func (s *DefaultApiService) UpdateUser(id int64, user User) (interface{}, error) {
+// UpdateUser -
+func (s *ApiService) UpdateUser(id int64, user User) (interface{}, error) {
 	// TODO - update UpdateUser with the required logic for this service method.
 	// Add api_default_service.go to the .openapi-generator-ignore to avoid overwriting this service implementation when updating open api generation.
 	return nil, errors.New("service method 'UpdateUser' not implemented")
